@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="dashboard-content-one">
+                <!-- Breadcubs Area Start Here -->
+    <div class="breadcrumbs-area">
+        <h3>Teacher</h3>
+        <ul>
+            <li>
+                <a href="/adminindex/">Home</a>
+            </li>
+            <li>Update Teacher Detail</li>
+        </ul>
+    </div>
+    <!-- Breadcubs Area End Here -->
+    <!-- Add New Teacher Area Start Here -->
+    <div class="card height-auto">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3>Update Teacher Detail</h3>
+                </div>
+               <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button"
+                    data-toggle="dropdown" aria-expanded="false">
+                    </a>
+                </div>
+            </div>
+            <form class="new-added-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>First Name *</label>
+                        <input type="text" name="fname" value="{{row.first_name}}" placeholder="" class="form-control">
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Last Name *</label>
+                        <input type="text" name="lname" value="{{row.last_name}}" placeholder="" class="form-control">
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Gender *</label>
+                        <select class="select2" name="Dgender"  id="Dgender">
+                            <option  value="">Please Select Gender *</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Others</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Date Of Birth *</label>
+                        <input type="text" name="DOB" placeholder="dd/mm/yyyy"  value="{{row.dtDOB}}"
+                        class="form-control air-datepicker">
+                        <i class="far fa-calendar-alt"></i>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>ID No</label>
+                        <input type="text" name="govid" value="{{row.stGovIDNo}}" placeholder="" class="form-control">
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Blood Group *</label>
+                        <select class="select2" name="Dbg" id="Dbg">
+                            <option   value="">Please Select Group *</option>
+                            <option value="1">A+</option>
+                            <option value="2">A-</option>
+                            <option value="3">B+</option>
+                            <option value="4">B-</option>
+                            <option value="5">O+</option>
+                            <option value="6">O-</option>
+                            <option value="7">AB+</option>
+                            <option value="8">AB-</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Religion *</label>
+                        <select class="select2" name="Dreligion" id="Dreligion">
+                            <option   value="">Please Select Religion *</option>
+                            <option value="1">Islam</option>
+                            <option value="2">Hindu</option>
+                            <option value="3">Christian</option>
+                            <option value="4">Buddish</option>
+                            <option value="5">Others</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>E-Mail</label>
+                        <input type="email" name="email" placeholder=""  value="{{row.email}}"
+                               class="form-control" disabled>
+                    </div>
+                    <form method="post" id="ClassSubjectList" action="{% url 'SubjectListOption' %}">
+                        {% csrf_token %}
+                        <div class="col-xl-3 col-lg-6 col-12 form-group" id="result">
+                            <input id="Selected" name="Selected"  type="hidden" value=""/>
+                            <label>Class *</label>
+                            <select  multiple="" class="select2"
+                                     data-placeholder="Please Select Class *" data-select2-id="selMulti"
+                                     tabindex="-1" aria-hidden="true"
+                                    name="Dclass" id="selMulti" onchange="myFunction();">
+                                    {%for c in getClass %}
+                                    <option value={{c.inId}}>{{c.stClass}}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-12 form-group">
+                            <label>Subject *</label>
+                            <input id="subjects" name="subjects"  type="hidden" value=""/>
+                            <select multiple="" class="select2" name="dSubject" id="dSubject"
+                                    data-placeholder="Please Select Class *" onchange="muSubject();">
+                            </select>
+                        </div>
+                    </form>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Section *</label>
+                        <select class="select2" name="Dsection" id="Dsection">
+                            <option value="" disabled>Please Select Section *</option>
+                            {% for s in section %}
+                            <option value={{s.inId}}>{{s.stSection}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Phone</label>
+                        <input type="text" name="txtPhone" placeholder=""   value="{{row.stPhone}}"
+                               class="form-control">
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12 form-group">
+                        <label>Address</label>
+                         <textarea class="textarea form-control" name="txtSbio" id="form-Address"
+                                  cols="10" rows="7">{{row.stAddress}}</textarea>
+
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-12 form-group">
+                        <label>Short BIO</label>
+                        <textarea class="textarea form-control" name="txtSbio" id="form-message"
+                                  cols="10" rows="7">{{row.stshortBIO}}</textarea>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 col-12 form-group ">
+                        <label>Picture</label>
+                        <div class="item-img">
+                                <img src="{{row.stPhotoPath}}" alt="teacher" width="150" height="100">
+                        </div>
+                        <!--<label class="text-dark-medium">Upload Teacher Photo (150px X 150px)</label>
+                        <input type="file" name="myfile" disabled>-->
+
+                    </div>
+                    <div class="col-12 form-group mg-t-8">
+                        <button type="submit"  name="submit" id="Submit" onclick="myFunction()"
+                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">
+                            Save</button>
+<!--                        <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>-->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% endblock content %}
+    {% if messages %}
+    {% for display in messages %}
+    <h3 style="color : green;">{{display}}</h3>
+    {% endfor %}
+    {% endif %}
+    <!-- Add New Teacher Area End Here -->
+    <footer class="footer-wrap-layout1">
+        <div class="copyright">© Copyrights <a href="#">School</a> 2021. All rights reserved. Designed by <a href="#">Rohit</a></div>
+    </footer>
+</div>
+

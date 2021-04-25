@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="dashboard-content-one">
+                <!-- Breadcubs Area Start Here -->
+    <div class="breadcrumbs-area">
+        <h3>Teacher</h3>
+        <ul>
+            <li>
+                <a href="/adminindex/">Home</a>
+            </li>
+            <li>Add New Teacher</li>
+        </ul>
+    </div>
+<!-- Student Table Area Start Here -->
+    <div class="card height-auto">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3>About Me</h3>
+                </div>
+               <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button"
+                    data-toggle="dropdown" aria-expanded="false">...</a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                    </div>
+                </div>
+            </div>
+                     <form class="new-added-form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="single-info-details">
+                            <div class="item-img">
+                                <img src="{{row.stPhotoPath}}" alt="teacher" width="250" height="236">
+                            </div>
+                            <div class="item-content">
+                                <div class="header-inline item-header">
+                                    <h3 class="text-dark-medium font-medium">{{row.first_name}} {{row.last_name}}</h3>
+                                    <div class="header-elements">
+                                        <ul>
+                                            <li><a href="#"><i class="far fa-edit"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-print"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-download"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p>{{row.stshortBIO}}</p>
+                                <div class="info-table table-responsive">
+                                    <table class="table text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td class="font-medium text-dark-medium">{{row.first_name}} {{row.last_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gender:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stGender}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Religion:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stReligion}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Joining Date:</td>
+                                                <td class="font-medium text-dark-medium">{{row.date_joined}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>E-mail:</td>
+                                                <td class="font-medium text-dark-medium">{{row.email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Date Of Birth:</td>
+                                                <td class="font-medium text-dark-medium">{{row.dtDOB}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Class:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stClass}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Subject:</td>
+                                                <td class="font-medium text-dark-medium">{{row.SubjectList}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Section:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stSection}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Blood Group:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stBloodgroup}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ID No:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stGovIDNo}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Address:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stAddress}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td class="font-medium text-dark-medium">{{row.stPhone}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                     </form>
+        </div>
+    </div>
+                <!-- Student Table Area End Here -->
+    {% endblock content %}
+
+    <!-- Add New Teacher Area End Here -->
+    <footer class="footer-wrap-layout1">
+        <div class="copyright">© Copyrights <a href="#">School</a> 2021. All rights reserved. Designed by <a href="#">Rohit</a></div>
+    </footer>
+</div>
